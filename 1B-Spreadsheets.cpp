@@ -17,17 +17,18 @@ long convertToNumeric(std::string input){
 
 std::string convertToAlpha(long input){
 
-    long N(input - 1);
     const int alphaSize(26);
     std::string output("");
-    while(N > 0){
-        if(N % alphaSize == 0){output += 'A';}
-        else{output += ('A' + (N % alphaSize - 1));}
-        N /= alphaSize;
+
+    while(input > 0){
+        char letter = 'Z';
+        long inputMod = input % alphaSize;
+        if(inputMod > 0){letter = 'A' + inputMod - 1;}
+        else{input -= alphaSize;}
+        input = input / alphaSize;
+        output = letter + output;
     }
-    if(input % alphaSize != 1){++output[0];}
-    size_t M = output.size();
-    for(int k = 0; k < M / 2; k++){char temp = output[k]; output[k] = output[M - 1 - k]; output[M - 1 - k] = temp;}
+
     return output;
 }
 
@@ -35,11 +36,11 @@ int main(){
     int n; scanf("%d\n", &n);
     while(n--){
         std::string line; getline(std::cin, line);
+
         bool coordinates(0);
-        if(line[0] == 'R'){for(int k = 1; k < line.size() - 1; k++){if(0 <= line[k - 1] && line[k - 1] <= '9' && line[k] == 'C'){coordinates = 1; break;}}}
+        if(line[0] == 'R' && ('0' <= line[1] && line[1] <= '9') && 1 < line.find('C') && line.find('C') < line.size() - 1){coordinates = 1;}
 
         if(coordinates){
-            
             int cPos = line.find('C');
             std::string rowString = line.substr(1, cPos - 1);  
             std::string colString = line.substr(cPos + 1);  
