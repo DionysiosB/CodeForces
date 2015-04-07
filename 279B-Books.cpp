@@ -2,22 +2,21 @@
 
 int main(){
 
-    int n; long  t; scanf("%d %ld", &n, &t);
+    int n; long t; scanf("%d %ld", &n, &t);
     long *minutes = new long[n];
-    for(int k = 0; k < n; k++){scanf("%ld", minutes + k);}
+    long totalTime = 0;
+    for(int k = 0; k < n; k++){scanf("%ld", minutes + k); totalTime += minutes[k];}
 
-    long totalTime(0); int totalBooks(0), maxTotalBooks(0);
+    long start(0), finish(0), currentSum(0), output(0);
 
-    for(int start = 0; start < n; start++){
-        totalTime = 0; totalBooks = 0;
-        for(int k = start; k < n; k++){
-            totalTime += minutes[k];
-            if(totalTime > t){break;}
-            ++totalBooks;
-        }
-        if(totalBooks > maxTotalBooks){maxTotalBooks = totalBooks;}
+    while(finish < n){
+        currentSum += minutes[finish++];
+        while(currentSum > t){currentSum -= minutes[start++];}
+        if(output < finish - start){output = finish - start;}
     }
 
-    printf("%d\n", maxTotalBooks);
+    printf("%ld\n", output);
+    
+    delete[] minutes;
     return 0;
 }
