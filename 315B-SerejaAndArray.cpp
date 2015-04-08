@@ -1,32 +1,21 @@
 #include <cstdio>
+#include <iostream>
 
 int main(){
 
     long n(0), m(0); scanf("%ld %ld", &n, &m);
-    long *array = new long[n + 1];
-    array[0] = 0; for(int k = 1; k <= n; k++){scanf("%ld", array + k);}
+    long *data = new long[n + 1];
+    data[0] = 0; for(int k = 1; k <= n; k++){scanf("%ld", data + k);}
 
-    vector<long[3]> operations;
-    vector<pair<long,long> elements;
+    long globalAdd(0);
+    
+    while(m--){
+        int action; std::cin >> action;
 
-    for(long k = 0; k < m; k++){
-        int operation(0); scanf("%d", &operation);
-        if(operation == 1){
-            long index(0), value(0); scanf("%ld %ld", &index, &value);
-            long array[3] = {1, index, value};
-            operations.push_back(array);
-        }
-        else if (operation == 2){
-            long value(0); scanf("%ld", &value);
-            long array[3] = {2, index, 0};
-            operations.push_back(array);
-        }
-        else if (operation == 3){
-            long index(0); scanf("%ld", &index);
-            long array[3] = {3, index, 0};
-            operations.push_back(array);
-            elements.push_back(pa
-        }
+        if(action == 1){long element, value; std::cin >> element >> value; data[element] = value - globalAdd;}
+        else if(action == 2){long addNew(0); std::cin >> addNew; globalAdd += addNew;}
+        else if(action == 3){long element; std::cin >> element; std::cout << data[element] + globalAdd << std::endl;}
     }
+
     return 0;
 }
