@@ -1,20 +1,31 @@
 #include <cstdio>
+#include <vector>
+#include <set>
 
 int main(){
 
-    long n(0), m(0); scanf("%ld %ld", &n, &m);
-    long *defeated = new long[n + 1];
-    for(long k = 1; k <= n; k++){defeated[k] = 0;}
+    long n, m; scanf("%ld %ld\n", &n, &m);
+    std::vector<long> defeated(n + 1);
+    std::set<long> standing;
+    for(long p = 1; p <= n; p++){standing.insert(p);}
 
-    
-    long l(0), r(0), winner(0);
-    for(long k = 0; k < m; k++){
-        scanf("%ld %ld %ld", &l, &r, &winner);
-        for(long current = l; current <= r; current++){if(defeated[current] == 0){defeated[current] = winner;}}
-        defeated[winner] = 0;
+    while(m--){
+        long l, r, w; scanf("%ld %ld %ld\n", &l, &r, &w);
+        std::set<long>::iterator index = standing.lower_bound(l);
+        std::vector<long> toErase;
+        while(index != standing.end() && (*index) <= r){
+            if(*index != w){
+                defeated[*index] = w;
+                toErase.push_back(*index);
+            }
+            index++;
+        }
+
+        for(long p = 0; p < toErase.size(); p++){standing.erase(toErase[p]);}
     }
 
-    for(long k = 1; k <= n; k++){printf("%ld ", defeated[k]);};  printf("\n");
+
+    for(long p = 1; p <= n; p++){printf("%ld ", defeated[p]);}; puts("");
 
     return 0;
 }
