@@ -3,30 +3,33 @@
 
 int main(){
 
-    long sequence[200001] = {0};
-    long count(1);
-    double total(0);
-    long n(0); scanf("%ld", &n);
-    long x(0), a(0), temp(0);
-    int operation(0);
+    const long L = 200001;
+    std::vector<long> seq(L, 0);
+    std::vector<long> diff(L, 0);
+    double sum(0), length(1);
+    long n; scanf("%ld", &n);
 
     while(n--){
 
-        scanf("%d", &operation);
+        int op; scanf("%d", &op);
 
-        if(operation == 1){
-            scanf("%ld %ld", &a, &x);
-            for(int k = 0; k < a; k++){sequence[k] += x;}
-            total += x * a;
+        if(op == 1){
+            long a, x; scanf("%ld %ld\n", &a, &x);
+            sum += a * x;
+            diff[a] += x; 
         }
-        else if(operation == 2){
-            scanf("%ld", &temp);
-            sequence[count++] = temp; 
-            total += temp;
+        else if(op == 2){
+            long temp; scanf("%ld\n", &temp);
+            seq[++length] = (temp);
+            sum += temp;
         }
-        else if(operation == 3){total -= sequence[--count];}
+        else if(op == 3){
+            diff[length - 1] += diff[length]; 
+            sum -= seq[length] + diff[length];
+            diff[length--] = 0;
+        }
 
-        printf("%.9lf\n", total/count);
+        printf("%.9lf\n", sum / length);
 
     }
 
