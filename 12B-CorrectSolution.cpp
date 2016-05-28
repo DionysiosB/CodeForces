@@ -22,8 +22,8 @@ int main(){
         for(int digit = 0; digit < 10; digit++){while(count[digit]--){output += ('0' + digit);}}
     }
 
-    if(answer == output){puts("OK");}
-    else{puts("WRONG_ANSWER");}
+    if(answer == output) puts("OK");
+    else puts("WRONG_ANSWER");
 
     return 0;
 }
