@@ -1,26 +1,20 @@
-#include <cstdio>
-#include <iostream>
+#include<cstdio>
 
 int main(){
 
-    double vp, vd, t, f, c; std::cin >> vp >> vd >> t >> f >> c;
+    double vp, vd, t, f, c, distance; 
+    long bijous(0);
 
-    double distance = 0;
-    int bijous = 0;
-    distance += t * vp; if(vd < vp){distance = c;}
+    scanf("%lf %lf %lf %lf %lf", &vp, &vd, &t, &f, &c);
+    bijous=0;
 
-    while(distance < c){
-
-        distance += distance / (vd - vp);
-
-        if(distance >= c){break;}
-        ++bijous;
-
-        distance += distance * vp / vd;
-        distance += f;
+    if(vp < vd){
+        distance = vd * vp * t / (vd-vp);
+        while(distance<c){
+            distance = vd * (distance + vp * (f + distance / vd)) / (vd-vp);
+            ++bijous;
+        }
     }
 
-    std::cout << bijous << std::endl;
-
-    return 0;
+    printf("%ld\n", bijous);
 }
