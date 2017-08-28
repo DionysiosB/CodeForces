@@ -1,9 +1,8 @@
 #include <iostream>
-using namespace std;
 
 int main(){
-    int w = 0; cin >> w;
-    string output = (w <= 2 || w % 2) ? "NO" : "YES";
-    cout << output << endl;
+    int w = 0; std::cin >> w;
+    std::string output = (w <= 2 || w % 2) ? "NO" : "YES";
+    std::cout << output << std::endl;
     return 0;
 }
