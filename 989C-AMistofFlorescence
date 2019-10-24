@@ -1,0 +1,177 @@
+#include <iostream>
+#include <string>
+#include <vector>
+ 
+using namespace std;
+ 
+int main()
+{
+    int a, b, c, d, lvl1, lvl2, lvl3;
+    bool t = 1;
+    cin >> a >> b >> c >> d;
+    a--;
+    vector < vector <int> > vv(50, vector <int> (50));
+    for(int i = 0; i <= 49; i++)
+    {
+        if(i % 2 == 0)
+        {
+            for(int j = 0; j < 50; j++)
+                vv[i][j] = 1;
+            continue;
+        }
+        if(!t)
+        {
+            lvl1 = i + 1;
+            break;
+        }
+        for(int j = 1; j <= 49; j += 2)
+        {
+            vv[i][j - 1] = 1;
+            vv[i][j] = 2, b--;
+            if(!b)
+            {
+                t = 0;
+                break;
+            }
+        }
+        if(!t)
+            for(int j = 0; j < 50; j++)
+                if(!vv[i][j])
+                    vv[i][j] = 1;
+    }
+    t = 1;
+    for(int i = lvl1 - 1; i <= 49; i++)
+    {
+        if(i % 2 == 0)
+        {
+            for(int j = 0; j < 50; j++)
+                vv[i][j] = 1;
+            continue;
+        }
+        if(!t)
+        {
+            lvl2 = i + 1;
+            break;
+        }
+        for(int j = 1; j <= 49; j += 2)
+        {
+            vv[i][j - 1] = 1;
+            vv[i][j] = 3, c--;
+            if(!c)
+            {
+                t = 0;
+                break;
+            }
+        }
+        if(!t)
+            for(int j = 0; j < 50; j++)
+                if(!vv[i][j])
+                    vv[i][j] = 1;
+    }
+    t = 1;
+    if(d > 1)
+    {
+        //for(int j = 0; j < 50; j++)
+           //vv[lvl2 - 1][j] = 1;
+ 
+        for(int i = lvl2 - 1; i <= 49; i++)
+        {
+            if(i % 2 == 0)
+            {
+                for(int j = 0; j < 50; j++)
+                    vv[i][j] = 1;
+                continue;
+            }
+            if(!t)
+            {
+                lvl3 = i + 1;
+                break;
+            }
+            for(int j = 1; j <= 49; j += 2)
+            {
+                vv[i][j - 1] = 1;
+                vv[i][j] = 4, d--;
+                if(d == 1)
+                {
+                    t = 0;
+                    break;
+                }
+            }
+            if(!t)
+                for(int j = 0; j < 50; j++)
+                    if(!vv[i][j])
+                        vv[i][j] = 1;
+        }
+        t = 1;
+        if(a > 0)
+        {
+            for(int i = lvl3 - 1; i < 50; i++)
+            {
+                if(i % 2)
+                {
+                    for(int j = 0; j < 50; j++)
+                        vv[i][j] = 4;
+                    continue;
+                }
+                if(!t)
+                    break;
+                for(int j = 1; j <= 49; j += 2)
+                {
+                    vv[i][j - 1] = 4;
+                    vv[i][j] = 1, a--;
+                    if(!a)
+                    {
+                        t = 0;
+                        break;
+                    }
+                }
+                if(!t)
+                    for(int j = 0; j < 50; j++)
+                        if(!vv[i][j])
+                            vv[i][j] = 4;
+            }
+        }
+    }
+    else
+    {
+        if(a > 0)
+        {
+            for(int i = lvl2 - 1; i <= 49; i++)
+            {
+                if(i % 2)
+                {
+                    for(int j = 0; j < 50; j++)
+                        vv[i][j] = 4;
+                    continue;
+                }
+                if(!t)
+                    break;
+                for(int j = 1; j <= 49; j += 2)
+                {
+                    vv[i][j - 1] = 4;
+                    vv[i][j] = 1, a--;
+                    if(!a)
+                    {
+                        t = 0;
+                        break;
+                    }
+                }
+                if(!t)
+                    for(int j = 0; j < 50; j++)
+                        if(!vv[i][j])
+                            vv[i][j] = 4;
+            }
+        }
+    }
+    //cout << lvl1 << " " << lvl2 << " " << lvl3 << '\n';
+    cout << 50 << " " << 50 << '\n';
+    for(int i = 0; i < 50; i++)
+    {
+        for(int j = 0; j < 50; j++)
+            if(vv[i][j])
+                cout << char(vv[i][j] + 'A' - 1);
+            else
+                cout << 'D';
+        cout << '\n';
+    }
+}
