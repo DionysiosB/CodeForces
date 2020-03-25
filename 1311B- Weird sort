@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n,m;
+unordered_set<int> s;
+int arr[105];
+
+bool func()
+{
+    for(int i=0;i<n;i++)//using the bubble sort logic here as in that also..we swap the adjacent elements..
+       {
+           for(int j=0;j<n-i-1;j++)
+           {
+               if(arr[j]>arr[j+1])
+               {
+                   swap(arr[j],arr[j+1]);
+                   auto it=s.find(j+1);//then checking that the index we just swapped is present in set or not...(j+1) as 1 based indexing 
+                   //is used in the question
+                   if(it==s.end())
+                   return false;
+               }
+           }
+       }
+       return true;
+}
+
+int main() 
+{
+   int t;cin>>t;
+   while(t--)
+   {
+       cin>>n>>m;
+       for(int i=0;i<n;i++)
+       cin>>arr[i];
+       
+       for(int i=0;i<m;i++)
+       {
+           int x;cin>>x;
+           s.insert(x);
+       }
+       
+       bool ans=func();
+       if(ans)
+       cout<<"YES"<<endl;
+       else
+       cout<<"NO"<<endl;
+       
+       s.clear();
+       
+       
+   }
+}
