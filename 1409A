@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+    long int a,b,k,n=10,m=0,t,i,j;
+    scanf("%ld",&t);
+    for(i=0;i<t;i++)
+    {
+        scanf("%ld %ld",&a,&b);
+        if(b>=a)
+        {
+            k=b-a;
+        }
+        else
+        {
+            k=a-b;
+        }
+     for(j=10;j>0;j--)
+     {
+        m+=k/j;
+        k=k%j;
+     }
+     printf("%ld\n",m);
+     m=0;
+    } 
+    return 0;
+}
