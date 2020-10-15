@@ -1,19 +1,15 @@
 #include <iostream>
 
-int main(){
-
+int main() {
     long t; std::cin >> t;
     while(t--){
         long n; std::cin >> n;
-        std::string num; std::cin >> num;
-        long cnt(0);
-        for(long p = 0; p < n; p++){
-            if(num[p] % 2){--cnt;}
-            else{++cnt;}
-        }
-        std::cout << num << "\t" << cnt << "\t";
-        std::cout << (cnt >= 0 ? 1 : 2) << std::endl;
+        std::string s; std::cin >> s;
+        bool turn(!(n % 2)), win(false);
+        for(long p = turn; !win && p < s.length(); p += 2){win |= ((s[p]) % 2 == !turn);}
+        std::cout << (2 - (turn ^ win)) << std::endl;
     }
 
     return 0;
 }
+
