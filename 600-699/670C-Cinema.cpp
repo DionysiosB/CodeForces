@@ -9,8 +9,7 @@ int main(){
     std::map<long, long> counts;
     for(long p = 0; p < n; p++){
         long x; std::cin >> x;
-        if(counts.count(x) > 0){++counts[x];}
-        else{counts[x] = 1;}
+        ++counts[x];
     }
 
     long m; scanf("%ld\n", &m);
