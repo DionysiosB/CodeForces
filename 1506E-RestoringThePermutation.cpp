@@ -1,11 +1,12 @@
 #include <cstdio>
 #include <vector>
 
-long find(std::vector<long> &v, long upper){
-
-
-
+long find(std::vector<long> &L, ll x){
+    if(x == L[x]){return x;}
+    return find(L, L[x]);
 }
+
+
 
 
 
