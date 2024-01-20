@@ -18,11 +18,17 @@ int main(){
             for(long q = p; !res && q < B; q++){
                 for(long r = q; !res && r < B; r++){
                     if((p + q + r) % 10 != 3){continue;}
+                    --cnt[p]; --cnt[q]; --cnt[r];
+                    if(cnt[p] >= 0 && cnt[q] >= 0 && cnt[r] >= 0){res = true;}
+                    ++cnt[p]; ++cnt[q]; ++cnt[r];
 
-                    if(p == q && q == r && cnt[r] > 2){res = true;}
-                    else if(p == q && cntaq] > 1 && cnt[r] > 0){res = true;}
-                    else if(q == r && cnt[r] > 1 && cnt[p] > 0){res = true;}
-                    else if(p < q && q < r && cnt[p] > 0 && cnt[q] > 0 && cnt[r] > 0){res = true;}
+                    /*
+                    printf("Testing: %ld %ld %ld  SUM:%ld\n", p, q, r, p + q + r);
+                    printf("Counts:  "); for(long u = 0; u < B; u++){printf("%ld ", cnt[u]);}
+                    puts("");
+                    */
+
+
                 }
             }
         }
