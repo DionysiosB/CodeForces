@@ -1,19 +1,24 @@
-#include <cstdio>
-#include <set>
+// Java Program to find sum of elements in a given array
+class Test {
+	static int arr[] = { 12, 3, 4, 15 };
 
-int main(){
+	// method for sum of elements in an array
+	static int sum()
+	{
+		int sum = 0; // initialize sum
+		int i;
 
-    long t; scanf("%ld", &t);
-    while(t--){
-        long n, k; scanf("%ld %ld", &n, &k);
-        std::set<long> s; for(long p = 0; p < n; p++){long a; scanf("%ld", &a); s.insert(a);}
-        if(k == 1){printf("%ld\n", 1L - 2 * (s.size() > 1));}
-        else{
-            long ans = (s.size() - 1 + k - 2) / (k - 1);
-            ans = (ans > 0) ? ans : 1;
-            printf("%ld\n", ans);
-        }
-    }
+		// Iterate through all elements and add them to sum
+		for (i = 0; i < arr.length; i++)
+			sum += arr[i];
 
-    return 0;
+		return sum;
+	}
+
+	// Driver method
+	public static void main(String[] args)
+	{
+		System.out.println("Sum of given array is "
+						+ sum());
+	}
 }
