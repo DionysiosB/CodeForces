@@ -1,15 +1,27 @@
-#include <cstdio>
-typedef long long ll;
+#include <iostream>
 
 int main(){
 
-    ll t; scanf("%lld", &t);
+    long t; std::cin >> t;
     while(t--){
-        int len; ll n; scanf("%d %lld", &len, &n);
-        ll res(0), tmp(n);
-        while(tmp){res = 10 * res + (tmp % 10); tmp /= 10;}
-        while(len--){res *= 10;}
-        printf("%lld\n", res);
+        long len; std::cin >> len;
+        std::string s; std::cin >> s;
+
+        std::string t(s.size(), '_');
+        if(s[0] != '9'){for(long p = 0; p < s.size(); p++){t[p] = '0' + ('9' - s[p]);}}
+        else{
+            int carry(0);
+            for(long p = s.size() - 1; p >= 0; p--){
+                int a = 1 - carry;
+                int b = s[p] - '0';
+                int diff = a - b;
+                if(diff < 0){carry = 1; diff += 10;}
+                else{carry = 0;}
+                t[p] = (char)(diff + '0');
+            }
+        }
+
+        std::cout << t << std::endl;
     }
 
 }
