@@ -1,35 +1,24 @@
 #include <cstdio>
-#include <map>
-#include <set>
+#include <vector>
+#include <unordered_map>
 
 int main(){
 
     long n; scanf("%ld", &n);
-    std::set<long> s, t;
-    std::map<long, long> w;
+    std::vector<long> v;
+    std::unordered_map<long, long> m;
 
+    long cmx(0);
     for(long p = 0; p < n; p++){
-        long a; scanf("%ld", &a);
-        for(std::set<long>::iterator it = s.begin(); it != s.end(); it++){t.insert(a + *it);}
-        s.insert(a);
-        ++w[a];
-    }
-
-    long mx(0);
-    for(std::set<long>::iterator sit = t.begin(); sit != t.end(); sit++){
-        long candsum = *sit;
-        long tmp(0);
-        for(std::map<long, long>::iterator mit = w.begin(); mit != w.end(); mit++){
-            long x = mit->first;
-            long y = mit->second;
-            if(!w.count(candsum - x)){continue;}
-            long z = w[candsum - x];
-            tmp += (y < z) ? y : z;
+        long x; scanf("%ld", &x);
+        for(long p = 0; p < v.size(); p++){
+            ++m[x + v[p]];
+            cmx = (cmx > m[x + v[p]] ? cmx : m[x + v[p]]);
         }
-        mx = (mx > tmp) ? mx : tmp;
+        v.push_back(x);
     }
 
-    printf("%ld\n", mx);
+    printf("%ld\n", cmx);
 
     return 0;
 }
