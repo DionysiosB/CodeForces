@@ -8,9 +8,10 @@ int main(){
         long L, R; scanf("%ld %ld", &L, &R);
         long mxl = (l > L ? l : L);
         long mnr = (r < R ? r : R);
-        long dist = mnr - mxl;
-        dist = (dist > 0 ? dist : 0);
-        printf("%ld\n", dist);
+        long len = (mnr - mxl);
+        long res = len + (l != L) + (r != R);
+        res = (len >= 0 ? res : 1);
+        printf("%ld\n", res);
     }
 
 }
