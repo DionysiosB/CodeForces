@@ -1,29 +1,24 @@
 #include <cstdio>
 #include <vector>
-#include <set>
+#include <unordered_set>
 
 int main(){
 
     long t; scanf("%ld", &t);
     while(t--){
         long n, m; scanf("%ld %ld", &n, &m);
-        std::set<long> sa, sb;
+        std::vector<std::vector<long> > f(n, std::vector<long>(m, 0));
+        std::unordered_set<long> sa, sb;
         for(long row = 0; row < n; row++){
             for(long col = 0; col < m; col++){
-                long x; scanf("%ld", &x);
-                if((row + col) % 2){sa.insert(x);}
-                else{sb.insert(x);}
+                scanf("%ld", &f[row][col]);
+                sa.insert(f[row][col]);
+                if(row && f[row - 1][col] == f[row][col]){sb.insert(f[row][col]);}
+                if(col && f[row][col - 1] == f[row][col]){sb.insert(f[row][col]);}
             }
         }
 
-        if(n * m == 1){puts("0"); continue;}
-
-        bool common(false);
-        for(std::set<long>::iterator it = sa.begin(); !common && it != sa.end(); it++){
-            if(sb.count(*it)){common = true;}
-        }
-
-        printf("%ld\n", (sa.size() - 1) + (sb.size() - common));
+        printf("%ld\n", sa.size() + sb.size() - (sb.size() > 0) - 1);
     }
 
 }
