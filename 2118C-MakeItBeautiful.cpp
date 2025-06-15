@@ -21,7 +21,7 @@ int main(){
         }
 
         for(ll p = 0; p < B; p++){
-            ll add = (1LL << p);
+            ll add = (1LL << p);  //CAUTION: need 1LL otherwise it's going to overflow
             ll need = k / add;
             need = (need < zv[p] ? need : zv[p]);
             beauty += need;
