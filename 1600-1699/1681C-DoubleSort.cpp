@@ -7,31 +7,25 @@ int main(){
     long t; scanf("%ld", &t);
     while(t--){
         long n; scanf("%ld", &n);
-        std::vector<std::pair<long, long> > va(n);
-        std::vector<long> wa(n);
-        for(long p = 0; p < n; p++){scanf("%ld", &va[p].first); va[p].second = p; wa[p] = va[p].first;}
-        sort(va.begin(), va.end());
-        std::vector<long> vb(n); for(long p = 0; p < n; p++){scanf("%ld", &vb[p]);}
-        bool possible(true);
-        for(long p = 1; possible && p < n; p++){
-            if(vb[va[p - 1].second] > vb[va[p].second]){possible = false;}
-        }
+        std::vector<long> a(n), b(n);
+        std::vector<std::pair<long, long> > v;
 
-        if(!possible){puts("-1"); continue;}
-
-        std::vector<std::pair<long, long> > s;
+        for(long p = 0; p < n; p++){scanf("%ld", &a[p]);}
+        for(long p = 0; p < n; p++){scanf("%ld", &b[p]);}
         for(long p = 0; p < n; p++){
-            for(long q = 1; q < n; q++){
-                if(wa[q - 1] <= wa[q]){continue;}
-                long tmp = wa[q - 1]; wa[q - 1] = wa[q]; wa[q] = tmp;
-                s.push_back(std::make_pair(q, q + 1));
+            for(long q = 0; q < n - 1; q++){
+                if(a[q] > a[q+1] || b[q] > b[q+1]){
+                    std::swap(a[q],a[q+1]);
+                    std::swap(b[q],b[q+1]);
+                    v.push_back(std::make_pair(q ,q + 1));
+                }
             }
         }
 
-        printf("%ld\n", s.size());
-        if(s.empty()){continue;}
-        for(long p = 0; p < s.size(); p++){printf("%ld %ld\n", s[p].first, s[p].second);}
-        puts("");
+        if(std::is_sorted(a.begin(), a.end()) && is_sorted(b.begin(), b.end())){
+            printf("%ld\n", v.size());
+            for(long p=0;p<v.size();p++){printf("%ld %ld\n", 1 + v[p].first, 1 + v[p].second);}
+        }
+        else{puts("-1");}
     }
-
 }
